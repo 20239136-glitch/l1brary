@@ -29,3 +29,104 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+
+/* Simple library design */
+body {
+    background-color: #f4f7f6;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #234e52 !important;
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+}
+
+h1, h2, h3 {
+    color: #234e52;
+}
+
+.table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .table thead th {
+        background-color: #234e52;
+        color: white;
+    }
+
+.btn-primary {
+    background-color: #319795;
+    border-color: #319795;
+}
+
+    .btn-primary:hover {
+        background-color: #267a76;
+        border-color: #267a76;
+    }
+
+.form-control {
+    border-radius: 6px;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Simple library design */
+body {
+    background-color: #f4f7f6;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #234e52 !important;
+}
+
+.navbar-brand,
+.nav-link {
+    color: white !important;
+}
+
+h1, h2, h3 {
+    color: #234e52;
+}
+
+.table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+    .table thead th {
+        background-color: #234e52;
+        color: white;
+    }
+
+.btn-primary {
+    background-color: #319795;
+    border-color: #319795;
+}
+
+    .btn-primary:hover {
+        background-color: #267a76;
+        border-color: #267a76;
+    }
+
+.form-control {
+    border-radius: 6px;
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
