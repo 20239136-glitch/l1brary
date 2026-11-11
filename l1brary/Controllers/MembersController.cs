@@ -35,7 +35,16 @@ public class MembersController : Controller
             return View(member);
         }
 
-        await _members.AddAsync(member);
+        try
+        {
+            await _members.AddAsync(member);
+        }
+        catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+        {
+            ModelState.AddModelError("Email", "Another member already uses this email.");
+            return View(member);
+        }
+
         return RedirectToAction(nameof(Index));
     }
 
@@ -60,7 +69,16 @@ public class MembersController : Controller
             return View(member);
         }
 
-        await _members.UpdateAsync(member);
+        try
+        {
+            await _members.UpdateAsync(member);
+        }
+        catch (PostgresException ex) when (ex.SqlState == PostgresErrorCodes.UniqueViolation)
+        {
+            ModelState.AddModelError("Email", "Another member already uses this email.");
+            return View(member);
+        }
+
         return RedirectToAction(nameof(Index));
     }
 
