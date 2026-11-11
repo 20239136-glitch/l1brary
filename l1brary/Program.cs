@@ -6,8 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<l1brary.Data.MemberRepository>();
-
 // Database: read the connection string from User Secrets and create one shared data source.
 var connectionString = builder.Configuration.GetConnectionString("l1brary");
 if (string.IsNullOrWhiteSpace(connectionString))
@@ -19,6 +17,7 @@ builder.Services.AddSingleton(dataSource);
 
 // Repositories: one new object per web request.
 builder.Services.AddScoped<BookRepository>();
+builder.Services.AddScoped<MemberRepository>();
 builder.Services.AddScoped<NoteRepository>(); // ADD THIS ONLY
 
 var app = builder.Build();
