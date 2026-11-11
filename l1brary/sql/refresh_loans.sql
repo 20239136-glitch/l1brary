@@ -1,6 +1,6 @@
 -- refresh_loans.sql : move the sample loans to recent dates, for Laboratory Activity 11
 -- Run it ONCE in the Supabase SQL Editor. It changes only the dates of lending.loan:
--- every member, book, note and loan stays, and the order of the dates is kept.
+-- every member, book, note and loan stays, and the order of the dates is kept.r
 WITH ref AS (
 SELECT GREATEST(MAX(loaned_on), MAX(returned_on)) AS last_date FROM lending.loan
 )
