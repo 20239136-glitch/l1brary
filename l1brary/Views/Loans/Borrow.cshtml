@@ -3,38 +3,64 @@
     ViewData["Title"] = "Borrow a book";
 }
 
-<h1 class="mb-3">Borrow a book</h1>
+<section class="borrow-page">
+    <header class="borrow-page__header">
+        <p class="eyebrow">Lending desk / New loan</p>
+        <h1 class="mb-2">Borrow a book</h1>
+        <p class="text-muted mb-0">Choose a member and title, then set the loan period.</p>
+    </header>
 
-<form asp-action="Borrow" method="post" class="card card-body" style="max-width:36rem">
-    <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+    <div class="borrow-layout">
+        <form asp-action="Borrow" method="post" class="card borrow-form">
+            <div class="borrow-form__topline">
+                <span class="borrow-form__step">01</span>
+                <div>
+                    <h2 class="h5 mb-1">Loan details</h2>
+                    <p class="text-muted mb-0">Complete each field to record the loan.</p>
+                </div>
+            </div>
 
-    <div class="mb-3">
-        <label asp-for="MemberId" class="form-label">Member</label>
-        <select asp-for="MemberId" asp-items="ViewBag.Members" class="form-select">
-            <option value="">(choose a member)</option>
-        </select>
-        <span asp-validation-for="MemberId" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-2 validation-summary"></div>
+
+            <div class="mb-4">
+                <label asp-for="MemberId" class="form-label">Member</label>
+                <select asp-for="MemberId" asp-items="ViewBag.Members" class="form-select">
+                    <option value="">(choose a member)</option>
+                </select>
+                <span asp-validation-for="MemberId" class="text-danger validation-message"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="BookId" class="form-label">Book</label>
+                <select asp-for="BookId" asp-items="ViewBag.Books" class="form-select">
+                    <option value="">(choose a book)</option>
+                </select>
+                <span asp-validation-for="BookId" class="text-danger validation-message"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="DaysAllowed" class="form-label">Days allowed</label>
+                <input asp-for="DaysAllowed" class="form-control" />
+                <span asp-validation-for="DaysAllowed" class="text-danger validation-message"></span>
+                <div class="form-text">Choose a loan period from 1 to 30 days.</div>
+            </div>
+
+            <div class="borrow-form__actions">
+                <button type="submit" class="btn btn-primary"><span aria-hidden="true">↗</span> Borrow book</button>
+                <a asp-action="Index" class="btn btn-link">Cancel</a>
+            </div>
+        </form>
+
+        <aside class="borrow-note">
+            <div class="borrow-note__icon" aria-hidden="true">i</div>
+            <h2 class="h5">Before you confirm</h2>
+            <p>Each member can have up to three books out at a time. The due date is calculated from today and the loan period you choose.</p>
+            <div class="borrow-note__rule"></div>
+            <span>Loan period</span>
+            <strong>1–30 days</strong>
+        </aside>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="BookId" class="form-label">Book</label>
-        <select asp-for="BookId" asp-items="ViewBag.Books" class="form-select">
-            <option value="">(choose a book)</option>
-        </select>
-        <span asp-validation-for="BookId" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="DaysAllowed" class="form-label">Days allowed</label>
-        <input asp-for="DaysAllowed" class="form-control" />
-        <span asp-validation-for="DaysAllowed" class="text-danger"></span>
-    </div>
-
-    <div>
-        <button type="submit" class="btn btn-primary">Borrow</button>
-        <a asp-action="Index" class="btn btn-link">Cancel</a>
-    </div>
-</form>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

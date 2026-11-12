@@ -3,37 +3,69 @@
     ViewData["Title"] = Model.Member.FullName;
 }
 
-<h1 class="mb-1">@Model.Member.FullName</h1>
-<p class="text-muted">@Model.Member.MemberType · @(Model.Member.Email ?? "no email")</p>
+<section class="member-details-page">
+    <header class="member-profile">
+        <div class="member-profile__avatar" aria-hidden="true">♙</div>
+        <div class="member-profile__identity">
+            <p class="eyebrow">Member account</p>
+            <h1 class="mb-1">@Model.Member.FullName</h1>
+            <p class="text-muted mb-0">@Model.Member.MemberType · @(Model.Member.Email ?? "no email")</p>
+        </div>
+        <a asp-action="Index" class="btn btn-outline-secondary member-profile__back">← Members</a>
+    </header>
 
-<h2 class="h5 mt-4">Loans</h2>
-@if (Model.Loans.Count == 0)
-{
-    <p>This member has never borrowed a book.</p>
-}
-else
-{
-    <table class="table table-striped align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th>Book</th>
-                <th>Loaned</th>
-                <th>Returned</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="member-loan-summary">
+        <div>
+            <span class="member-loan-summary__number">@Model.Loans.Count</span>
+            <span class="member-loan-summary__label">Total loans</span>
+        </div>
+        <div>
+            <span class="member-loan-summary__number">@Model.Loans.Count(loan => loan.ReturnedOn == null)</span>
+            <span class="member-loan-summary__label">Currently out</span>
+        </div>
+        <div>
+            <span class="member-loan-summary__number">@Model.Loans.Count(loan => loan.ReturnedOn != null)</span>
+            <span class="member-loan-summary__label">Returned</span>
+        </div>
+    </div>
+
+    <div class="member-history-heading">
+        <div>
+            <p class="eyebrow">Activity</p>
+            <h2 class="h4 mb-0">Loan history</h2>
+        </div>
+        <span class="member-history-heading__count">@Model.Loans.Count records</span>
+    </div>
+    @if (Model.Loans.Count == 0)
+    {
+        <div class="member-empty-state">
+            <span class="member-empty-state__icon" aria-hidden="true">▤</span>
+            <h3 class="h5">No loan history yet</h3>
+            <p class="text-muted mb-0">This member has never borrowed a book.</p>
+        </div>
+    }
+    else
+    {
+        <div class="member-loan-list">
             @foreach (var loan in Model.Loans)
             {
-                <tr>
-                    <td>@loan.BookTitle</td>
-                    <td>@loan.LoanedOn.ToString("yyyy-MM-dd")</td>
-                    <td>@(loan.ReturnedOn?.ToString("yyyy-MM-dd") ?? "—")</td>
-                    <td>@loan.Status</td>
-                </tr>
+                <article class="member-loan-row">
+                    <div class="member-loan-row__book">
+                        <span class="member-loan-row__icon" aria-hidden="true">▤</span>
+                        <div>
+                            <h3 class="h6 mb-1">@loan.BookTitle</h3>
+                            <span class="text-muted">Loaned @loan.LoanedOn.ToString("yyyy-MM-dd")</span>
+                        </div>
+                    </div>
+                    <div class="member-loan-row__returned">
+                        <span class="member-loan-row__label">Returned</span>
+                        <span>@(loan.ReturnedOn?.ToString("yyyy-MM-dd") ?? "—")</span>
+                    </div>
+                    <span class="loan-status @(loan.Status == "Overdue" ? "loan-status--overdue" : loan.Status == "Out" ? "loan-status--out" : "loan-status--returned")">@loan.Status</span>
+                </article>
             }
-        </tbody>
-    </table>
-}
+        </div>
+    }
 
-<a asp-action="Index" class="btn btn-link px-0">Back to members</a>
+    <a asp-action="Index" class="btn btn-link px-0 member-details-page__back">Back to members</a>
+</section>

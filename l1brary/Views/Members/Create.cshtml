@@ -7,12 +7,12 @@
     <div class="mb-3">
         <label asp-for="FullName" class="form-label"></label>
         <input asp-for="FullName" class="form-control" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
+        <span asp-validation-for="FullName" class="text-danger validation-message"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Email" class="form-label"></label>
         <input asp-for="Email" type="text" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+        <span asp-validation-for="Email" class="text-danger validation-message"></span>
     </div>
     <div class="mb-3">
         <label asp-for="MemberType" class="form-label"></label>
@@ -21,7 +21,7 @@
             <option value="Student">Student</option>
             <option value="Faculty">Faculty</option>
         </select>
-        <span asp-validation-for="MemberType" class="text-danger"></span>
+        <span asp-validation-for="MemberType" class="text-danger validation-message"></span>
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Add a member</button>
