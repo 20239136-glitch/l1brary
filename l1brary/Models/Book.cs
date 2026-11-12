@@ -2,7 +2,7 @@
 
 namespace l1brary.Models;
 
-// One Book object holds one row of lending.book.
+// One Book object holds one row of lending.book.0
 public class Book
 {
     public long BookId { get; set; } // book_id BIGINT, the primary key
