@@ -95,4 +95,13 @@ public class LoanRepository
         await transaction.CommitAsync();
         return true;
     }
+
+    public async Task ReturnAsync(long loanId)
+    {
+        const string sql = "UPDATE lending.loan SET returned_on = CURRENT_DATE " +
+                           "WHERE loan_id = @id AND returned_on IS NULL;";
+        await using var command = _dataSource.CreateCommand(sql);
+        command.Parameters.AddWithValue("id", loanId);
+        await command.ExecuteNonQueryAsync();
+    }
 }
